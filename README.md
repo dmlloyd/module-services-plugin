@@ -12,7 +12,7 @@ Add the following plugin configuration to your POM:
 <build>
     <plugins>
         <plugin>
-            <groupId>io.github.dmlloyd</groupId>
+            <groupId>io.github.dmlloyd.maven</groupId>
             <artifactId>module-services-plugin</artifactId>
             <version>1.0</version>
             <executions>
@@ -47,4 +47,4 @@ Your project can target any version of Java.
 
 ## Limitations
 
-If you put your `module-info.class` into a nonstandard place (for example, `META-INF/versions/9/module-info.class`), you must configure the `classesDirectory` property accordingly, otherwise the file will not be found and the build will fail.
+If you put your `module-info.class` into a nonstandard place (for example, `META-INF/versions/9/module-info.class`), you must configure the `classesDirectory` property accordingly, otherwise the file will not be found and nothing will be produced.

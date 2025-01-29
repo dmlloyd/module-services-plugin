@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -57,21 +58,25 @@ public final class ModuleServicesMojo extends AbstractMojo {
         byte[] moduleInfo;
         try {
             moduleInfo = Files.readAllBytes(resolved);
+        } catch (NoSuchFileException ignored) {
+            getLog().info("No module descriptor found; no services files generated.");
+            return;
         } catch (IOException e) {
             throw new MojoExecutionException("Cannot read `module-info.class` file from " + classesDirectory, e);
         }
         Path services = outputDirectory.toPath().resolve("META-INF/services");
-        try {
-            Files.createDirectories(services);
-        } catch (IOException e) {
-            throw new MojoExecutionException("Failed to create " + services, e);
-        }
+        int cnt = 0;
         ClassModel cm = ClassFile.of().parse(moduleInfo);
         ModuleAttribute ma = cm.findAttribute(Attributes.module()).orElseThrow(() -> new MojoExecutionException("Module file does not contain a module attribute"));
         for (ModuleProvideInfo provided : ma.provides()) {
             String serviceName = provided.provides().asInternalName().replace('/', '.');
             List<ClassEntry> with = provided.providesWith();
             if (! with.isEmpty()) {
+                try {
+                    Files.createDirectories(services);
+                } catch (IOException e) {
+                    throw new MojoExecutionException("Failed to create " + services, e);
+                }
                 Path outputFile = services.resolve(serviceName);
                 getLog().debug("Writing " + with.size() + " services to " + outputFile);
                 try (BufferedWriter bw = Files.newBufferedWriter(outputFile, StandardCharsets.UTF_8)) {
@@ -83,7 +88,9 @@ public final class ModuleServicesMojo extends AbstractMojo {
                 } catch (IOException e) {
                     throw new MojoExecutionException("Failed to write " + outputFile, e);
                 }
+                cnt ++;
             }
         }
+        getLog().info("Generated " + cnt + " services file(s).");
     }
 }
