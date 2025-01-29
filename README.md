@@ -1,6 +1,6 @@
 # Module services plugin
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.dmlloyd/module-services-plugin?color=green)](https://search.maven.org/search?q=g:io.github.dmlloyd%20AND%20a:module-services-plugin)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.dmlloyd.maven/module-services-plugin?color=green)](https://search.maven.org/search?q=g:io.github.dmlloyd.maven%20AND%20a:module-services-plugin)
 
 A Maven plugin to produce a classpath `META-INF/services` file from a compiled `module-info` descriptor.
 
