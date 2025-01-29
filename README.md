@@ -34,11 +34,12 @@ By default, the plugin execution will run during the `process-classes` phase.
 
 The following parameters are supported by this plugin.
 
-| Name               | Type      | Required | Since | Description |
-|--------------------|-----------|----------| ----- | -------------|
-| `classesDirectory` | `File`    | Yes      | 1.0 | The input directory where the module info class should be found.<br>**Default:** `${project.build.outputDirectory}`<br>**User Property:** `module.services.classes`
-| `outputDirectory`  | `File`    | Yes      | 1.0 | The output directory where the services file should be placed.<br>**Default:** `${project.build.outputDirectory}`<br>**User Property:** `module.services.classes`
-| `skip`             | `boolean` | No       | 1.0 | Set to true to skip execution of this plugin.<br>**Default:** `false`<br>**User Property:** `module.services.skip`
+| Name               | Type          | Required | Since | Description |
+|--------------------|---------------|----------|-------| -------------|
+| `classesDirectory` | `File`        | Yes      | 1.0   | The input directory where the module info class should be found.<br>**Default:** `${project.build.outputDirectory}`<br>**User Property:** `module.services.classes` |
+| `outputDirectory`  | `File`        | Yes      | 1.0   | The output directory where the services file should be placed.<br>**Default:** `${project.build.outputDirectory}`<br>**User Property:** `module.services.classes` |
+| `skip`             | `boolean`     | No       | 1.0   | Set to true to skip execution of this plugin.<br>**Default:** `false`<br>**User Property:** `module.services.skip` |
+| `excludeServices`  | `Set<String>` | No       | 1.1   | A set of services to exclude from generation. |
 
 ## Requirements
 

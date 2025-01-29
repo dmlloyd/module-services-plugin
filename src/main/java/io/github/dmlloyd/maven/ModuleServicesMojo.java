@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 
 import io.github.dmlloyd.classfile.Attributes;
 import io.github.dmlloyd.classfile.ClassFile;
@@ -39,6 +40,12 @@ public final class ModuleServicesMojo extends AbstractMojo {
     private File outputDirectory;
 
     /**
+     * A set of services to exclude from generation.
+     */
+    @Parameter
+    private Set<String> excludeServices;
+
+    /**
      * Set to true to skip execution of this plugin.
      */
     @Parameter(defaultValue = "false", property = "module.services.skip")
@@ -53,6 +60,10 @@ public final class ModuleServicesMojo extends AbstractMojo {
         if (skip) {
             getLog().info("Execution of module-services-plugin:generate has been skipped by configuration");
             return;
+        }
+        Set<String> excludeServices = this.excludeServices;
+        if (excludeServices == null) {
+            excludeServices = Set.of();
         }
         Path resolved = classesDirectory.toPath().resolve("module-info.class");
         byte[] moduleInfo;
@@ -70,6 +81,10 @@ public final class ModuleServicesMojo extends AbstractMojo {
         ModuleAttribute ma = cm.findAttribute(Attributes.module()).orElseThrow(() -> new MojoExecutionException("Module file does not contain a module attribute"));
         for (ModuleProvideInfo provided : ma.provides()) {
             String serviceName = provided.provides().asInternalName().replace('/', '.');
+            if (excludeServices.contains(serviceName)) {
+                getLog().debug("Excluding service " + serviceName);
+                continue;
+            }
             List<ClassEntry> with = provided.providesWith();
             if (! with.isEmpty()) {
                 try {
