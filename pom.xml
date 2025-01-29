@@ -20,6 +20,14 @@
         <developerConnection>scm:git:git@github.com:dmlloyd/module-services-plugin</developerConnection>
     </scm>
 
+    <developers>
+        <developer>
+            <id>dmlloyd</id>
+            <email>dmlloyd@flurg.com</email>
+            <name>David Lloyd</name>
+        </developer>
+    </developers>
+
     <issueManagement>
         <system>GitHub</system>
         <url>https://github.com/dmlloyd/module-services-plugin/issues</url>
