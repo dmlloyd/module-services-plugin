@@ -67,7 +67,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>${version.org.apache.maven.plugins.plugin}</version>
+                <version>${version.org.apache.maven.plugin-tools}</version>
             </plugin>
         </plugins>
     </reporting>
@@ -149,7 +149,7 @@
                             <goal>helpmojo</goal>
                         </goals>
                         <configuration>
-                            <helpPackageName>org.jboss.bridger</helpPackageName>
+                            <helpPackageName>io.github.dmlloyd.maven</helpPackageName>
                         </configuration>
                     </execution>
                 </executions>
