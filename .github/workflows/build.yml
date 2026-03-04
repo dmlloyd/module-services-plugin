@@ -1,9 +1,9 @@
-name: Gizmo 2 CI
+name: Module Services Plugin CI
 
 on:
   push:
-    branches-ignore:
-      - 'dependabot/**'
+    branches:
+      - 'main'
   pull_request:
 
 jobs:
