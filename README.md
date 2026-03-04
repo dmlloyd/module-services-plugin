@@ -14,7 +14,7 @@ Add the following plugin configuration to your POM:
         <plugin>
             <groupId>io.github.dmlloyd.maven</groupId>
             <artifactId>module-services-plugin</artifactId>
-            <version>1.2</version>
+            <version>1.3</version>
             <executions>
                 <execution>
                     <id>generate-services</id>
