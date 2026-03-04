@@ -25,7 +25,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 /**
  * The module services mojo.
  */
-@Mojo(name = "generate", defaultPhase = LifecyclePhase.PROCESS_CLASSES)
+@Mojo(name = "generate", defaultPhase = LifecyclePhase.PROCESS_CLASSES, threadSafe = true)
 public final class ModuleServicesMojo extends AbstractMojo {
     /**
      * The input directory where the module info class should be found.
